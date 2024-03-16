@@ -1,0 +1,137 @@
+/* HOMEPAGE */
+
+#homepage,
+.homepage-section,
+.nav-icons,
+.icon-container a {
+	display: grid;
+}
+
+#homepage {
+	height: 100vh;
+	padding: $spacing-large 0;
+	grid-template: 1fr / repeat(2, 1fr);
+	justify-items: center;
+}
+.homepage-section {
+	padding: $spacing-normal 0;
+}
+
+.letters,
+.nav-icons {
+	grid-template: repeat(4, 1fr) / 1fr;
+	align-items: center;
+}
+
+// header letters
+
+.letters {
+	margin-left: $spacing-medium;
+}
+.homepage-letter {
+	font-family: $homepage-display-font;
+	font-size: 12rem;
+	font-weight: 900;
+	line-height: 1;
+	position: relative;
+	
+	&::after {
+		position: absolute;
+		left: $spacing-normal;
+	}
+}
+.o {
+	@include letter($accent-color--about, $accent-color--about-shadow, "O");
+}
+.l {
+	@include letter($accent-color--skills, $accent-color--skills-shadow, "L");
+}
+.h {
+	@include letter($accent-color--projects, $accent-color--projects-shadow, "H");
+}
+.a {
+	@include letter($accent-color--contact, $accent-color--contact-shadow, "A");
+}
+
+// navigation icons
+.icons {
+	margin-right: $spacing-medium;
+}
+.icon-container {
+	margin-top: $spacing-small;
+
+	img {
+		max-height: 9rem;
+		object-fit: contain;
+	}
+	span {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 550px) {
+
+	#homepage {
+		grid-template: repeat(2, 1fr) / 1fr;
+	}
+	
+	%four-columns {
+		grid-template: 1fr / repeat(4, 13rem);
+		justify-items: center;
+	}
+	.homepage-letter {
+		left: -$spacing-small;
+	}
+	.letters {
+		@extend %four-columns;
+		align-items: end;
+		margin-left: 0;
+	}
+	.icons {
+		margin-right: 0;
+	}
+	.nav-icons {
+		@extend %four-columns;
+		align-items: start;
+	}
+	.icon-container a {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		img {
+			border-radius: $border-radius-circle;
+		}
+
+		.about-img {
+			@include hp-icon-hover($accent-color--about);
+		}
+		.skills-img {
+			@include hp-icon-hover($accent-color--skills);
+		}
+		.projects-img {
+			@include hp-icon-hover($accent-color--projects);
+		}
+		.contact-img {
+			@include hp-icon-hover($accent-color--contact);
+		}
+	}
+}
+
+@media screen and (max-height: 400px) {
+	#homepage {
+		padding: 0;
+	}
+}
+@media screen and (min-width: 550px) and (min-height: 400px) {
+
+	.icon-container a {
+		
+		.section-nav-title {
+			display: initial;
+			padding: $spacing-normal 0 0;
+			text-transform: uppercase;
+		}
+	}
+	
+}
