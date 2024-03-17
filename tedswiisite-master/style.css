@@ -1,0 +1,97 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+section {
+	text-align: center;
+    float: left;
+    display: block;
+    height: 100%;
+    margin: 0;
+}
+
+.section {
+	background-image:    url(img/bg.png);
+    background-size:     cover;
+    background-repeat:   repeat-x;
+    background-position: center 0%;  
+}
+
+.horizon-prev, .horizon-next {
+    position: fixed;
+    top: 50%;
+    margin-top: -24px;
+    z-index: 9999;
+}
+
+.horizon-prev {
+    left: 20px;
+}
+
+.horizon-next {
+    right: 20px;
+}
+
+
+a {
+	background-image:    url(img/button.png);
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;  
+	color: #FFF;
+	text-decoration: none;
+	text-shadow:0px 0px 7px black;
+	cursor: url('img/wii-cursor.png'), default;
+	border-radius: 50px;
+ 	border: 2px solid #646464;
+	width: 19.715%;
+	height: 25%;
+	line-height: 200px;
+	display: inline-block;
+	margin: 4px;
+	text-align: center;
+	transition: 1s;
+}
+
+a:hover {
+ 	border: 2px solid #72c5da;
+	box-shadow: 0 0 0 8px rgba(114, 197, 218, 0.5), 0 0 20px 8px rgba(114, 197, 218, 0.5);
+ 	transition: 0.12s;
+}
+
+footer
+{
+	text-align: center;
+	background-image:    url(img/footer.png);
+    background-size:     100%;
+    background-repeat:   no-repeat;
+    background-position: top center;  
+	width: 100%;
+	height: 16%;
+    position: fixed;
+    bottom: 0;
+}
+
+#footer p {
+    margin: 3% 0;
+	font-size: 35px;
+}
+
+* {
+	margin: 0;
+	cursor: url('img/wii-cursor.png'), default;
+	padding: 0;
+	  	font-family: 'Uni Sans';
+	font-weight: 300;
+	font-size: 25pt;
+}
+@font-face {
+	font-family: 'Uni Sans';
+	src: url(fnt/unisans-heavy.otf);
+	font-weight: bold;
+	font-weight: 600;
+}
