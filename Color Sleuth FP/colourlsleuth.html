@@ -10,10 +10,24 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        margin: 0;
+        margin: 0;  
         background-image: url('assets/coloursleuthbg.png');
         background-size: cover;
         background-position: center;
+    }
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        background-color: #fdf6bc;
+        color: #000;
+        border: 1px solid #000;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: 'Courier New', Courier, monospace;
+        border-color: #000;
+        border-radius: 4px;
     }
     iframe {
         border: 0;
@@ -21,6 +35,7 @@
 </style>
 </head>
 <body>
+    <a href="#" onclick="history.back()" class="back-button">Back</a>
     <iframe width="392" height="620" src="https://studio.code.org/projects/applab/B2tR72p9nHd5Fikrg1DMaCzVnFzwLYaiMFLbU-LIQRE/embed"></iframe>
 </body>
 </html>
