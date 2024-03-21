@@ -112,13 +112,14 @@
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       if (isSpacePressed) {
-        player.accelerationY = 2;
+        player.accelerationY = -4;
       } else {
       
-        player.accelerationY = 2;
+        player.accelerationY = 4;
       }
 
       player.velocityY += player.accelerationY + 0.35;
+      player.velocityY = clamp(player.velocityY, -14, 14);
       player.y += player.velocityY;
 
       context.fillStyle = 'white';
