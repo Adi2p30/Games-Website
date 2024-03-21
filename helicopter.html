@@ -112,10 +112,10 @@
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       if (isSpacePressed) {
-        player.accelerationY = -1;
+        player.accelerationY = -3;
       } else {
       
-        player.accelerationY = 1;
+        player.accelerationY = 3;
       }
 
       player.velocityY += player.accelerationY + 0.35;
