@@ -213,8 +213,8 @@
 
     playAgainButton.addEventListener('click', function() {
       player.y = 100;
-      obstacle.x += 20
       player.velocityY = 0;
+      obstacle.x += 100
       gameIsOver = false;
       score = 0; // Reset score
       playAgainButton.style.display = 'none';
