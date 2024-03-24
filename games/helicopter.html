@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Helicopter Escape Game</title>
+  <title>Helicopter Game</title>
   <meta charset="UTF-8">
   <style>
     html, body {
@@ -41,9 +41,25 @@
     button:hover {
       background-color: #45a049;
     }
+  
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        background-color: #fdf6bc;
+        color: #000;
+        border: 1px solid #000;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: 'Courier New', Courier, monospace;
+        border-color: #000;
+        border-radius: 4px;
+    }
   </style>
 </head>
 <body>
+  <a href="#" onclick="history.back()" class="back-button">Back</a>
   <canvas width="800" height="550" id="game"></canvas>
   <button id="playAgainButton" style="display: none;">Play Again</button>
   <script>
@@ -213,11 +229,14 @@
 
     playAgainButton.addEventListener('click', function() {
       player.y = 100;
-      player.x += 40;
       player.velocityY = 0;
       gameIsOver = false;
       score = 0; // Reset score
       playAgainButton.style.display = 'none';
+      obstacles.forEach((obstacle, index) => {
+        obstacle.x -= 100005;
+        context.fillRect(obstacle.x, obstacle.y, 65, 135);
+      });
       gameLoop();
     });
 
