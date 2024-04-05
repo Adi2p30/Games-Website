@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Helicopter Game</title>
-  <meta charset="UTF-8">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #game {
-      display: block;
-      margin-top: 20px; /* Adjust as needed */
-    }
-    #score {
+  <head>
+    <title>Helicopter Game</title>
+    <meta charset="UTF-8" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #game {
+        display: block;
+        margin-top: 20px; /* Adjust as needed */
+      }
+      #score {
         position: absolute;
-        top: 10%        ;
+        top: 10%;
         left: 50%;
-        transform: translateX(-50%); 
+        transform: translateX(-50%);
         color: yellow;
         font-size: 24px;
-}
-    button {
+      }
+      button {
         padding: 10px 20px;
         font-size: 16px;
-        background-color: #4CAF50;
+        background-color: #4caf50;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        position: absolute; 
-        bottom: 10% ; 
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  
-    .back-button {
+        position: absolute;
+        bottom: 10%;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .back-button {
         position: absolute;
         top: 20px;
         left: 20px;
@@ -52,196 +53,215 @@
         border: 1px solid #000;
         cursor: pointer;
         text-decoration: none;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: "Courier New", Courier, monospace;
         border-color: #000;
         border-radius: 4px;
-    }
-  </style>
-</head>
-<body>
-  <a href="#" onclick="history.back()" class="back-button">Back</a>
-  <canvas width="800" height="550" id="game"></canvas>
-  <button id="playAgainButton" style="display: none;">Play Again</button>
-  <script>
-    const canvas = document.getElementById('game');
-    const context = canvas.getContext('2d');
-    const playAgainButton = document.getElementById('playAgainButton');
-    const scoreDisplay = document.createElement('div');
-    scoreDisplay.id = 'score';
-    document.body.appendChild(scoreDisplay);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#" onclick="history.back()" class="back-button">Back</a>
+    <canvas width="800" height="550" id="game"></canvas>
+    <button id="playAgainButton" style="display: none">Play Again</button>
+    <script>
+      const canvas = document.getElementById("game");
+      const context = canvas.getContext("2d");
+      const playAgainButton = document.getElementById("playAgainButton");
+      const scoreDisplay = document.createElement("div");
+      scoreDisplay.id = "score";
+      document.body.appendChild(scoreDisplay);
 
-    let isSpacePressed = false;
-    let gameIsOver = false;
-    let score = 0;
+      let isSpacePressed = false;
+      let gameIsOver = false;
+      let score = 0;
 
-    function clamp(num, min, max) {
-      return Math.min(Math.max(min, num), max);
-    }
+      function clamp(num, min, max) {
+        return Math.min(Math.max(min, num), max);
+      }
 
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
 
-    const player = {
-      x: 200,
-      y: 100,
-      width: 100,
-      height: 60,
-      velocityY: 0,
-      accelerationY: -1000
-    };
+      const player = {
+        x: 200,
+        y: 100,
+        width: 100,
+        height: 60,
+        velocityY: 0,
+        accelerationY: -1000,
+      };
 
-    let openings = [{
-      x: 0,
-      width: canvas.width,
-      topHeight: 50,
-      bottomHeight: 50
-    },
-    {
-      x: canvas.width,
-      width: getRandomInt(400, canvas.width),
-      topHeight: 50,
-      bottomHeight: getRandomInt(10, 100)
-    }];
+      let openings = [
+        {
+          x: 0,
+          width: canvas.width,
+          topHeight: 50,
+          bottomHeight: 50,
+        },
+        {
+          x: canvas.width,
+          width: getRandomInt(400, canvas.width),
+          topHeight: 50,
+          bottomHeight: getRandomInt(10, 100),
+        },
+      ];
 
-    let obstacles = [{
-      x: canvas.width,
-      y: canvas.height / 2
-    },
-    {
-      x: canvas.width * 2,
-      y: canvas.height / 2
-    }];
+      let obstacles = [
+        {
+          x: canvas.width,
+          y: canvas.height / 2,
+        },
+        {
+          x: canvas.width * 2,
+          y: canvas.height / 2,
+        },
+      ];
 
-    const wallColor = 'green';
-    context.fillStyle = wallColor;
-    context.fillRect(0, 0, 1, 1);
-    const wallData = context.getImageData(0, 0, 1, 1);
-    const [wallRed, wallGreen, wallBlue] = wallData.data;
+      const wallColor = "green";
+      context.fillStyle = wallColor;
+      context.fillRect(0, 0, 1, 1);
+      const wallData = context.getImageData(0, 0, 1, 1);
+      const [wallRed, wallGreen, wallBlue] = wallData.data;
 
-    function gameLoop() {
-        score++;          
+      function gameLoop() {
+        score++;
         if (gameIsOver) {
-        return;
-      }
-
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (isSpacePressed) {
-        player.accelerationY = -3;
-      } else {
-      
-        player.accelerationY = 3;
-      }
-
-      player.velocityY += player.accelerationY + 0.35;
-      player.velocityY = clamp(player.velocityY, -10, 10);
-      player.y += player.velocityY;
-
-      context.fillStyle = 'white';
-      context.fillRect(player.x, player.y, player.width, player.height);
-
-      context.fillStyle = 'green';
-      openings.forEach((opening, index) => {
-        opening.x -= 15;
-
-        if (index === openings.length - 1 && opening.x + opening.width <= canvas.width) {
-         // Increase score when passing through an opening
-          openings.push({
-            x: opening.x + opening.width,
-            width: getRandomInt(400, canvas.width),
-            topHeight: opening.bottomHeight,
-            bottomHeight: getRandomInt(10, 100)
-          });
-        }
-
-        context.beginPath();
-        context.moveTo(opening.x, 0);
-        context.lineTo(opening.x, opening.topHeight);
-        context.lineTo(opening.x + opening.width, opening.bottomHeight);
-        context.lineTo(opening.x + opening.width, 0);
-        context.closePath();
-        context.fill();
-
-        context.beginPath();
-        context.moveTo(opening.x, canvas.height);
-        context.lineTo(opening.x, opening.topHeight + 450);
-        context.lineTo(opening.x + opening.width, opening.bottomHeight + 450);
-        context.lineTo(opening.x + opening.width, canvas.height);
-        context.closePath();
-        context.fill();
-      });
-
-      obstacles.forEach((obstacle, index) => {
-        obstacle.x -= 15;
-        context.fillRect(obstacle.x, obstacle.y, 65, 135);
-
-        if (index === obstacles.length - 1 && obstacle.x + 65 <= canvas.width) {
-          obstacles.push({
-            x: canvas.width * 2,
-            y: getRandomInt(100, canvas.height - 135 - 100)
-          });
-        }
-      });
-
-      openings = openings.filter(opening => opening.x + opening.width > 0);
-      obstacles = obstacles.filter(obstacle => obstacle.x + 65 > 0);
-
-      const { data } = context.getImageData(player.x, player.y, player.width, player.height);
-
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i];
-        const g = data[i + 1];
-        const b = data[i + 2];
-
-        if (r === wallRed && g === wallGreen && b === wallBlue) {
-          context.strokeStyle = 'red';
-          context.setLineDash([5, 15])
-          context.lineWidth = 4;
-
-          context.beginPath();
-          context.arc(player.x + player.width / 2, player.y + player.height/ 2, player.width, 0, 2 * Math.PI);
-          context.stroke();
-
-          gameIsOver = true;
-          playAgainButton.style.display = 'block';
           return;
         }
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (isSpacePressed) {
+          player.accelerationY = -3;
+        } else {
+          player.accelerationY = 3;
+        }
+
+        player.velocityY += player.accelerationY + 0.35;
+        player.velocityY = clamp(player.velocityY, -10, 10);
+        player.y += player.velocityY;
+
+        context.fillStyle = "white";
+        context.fillRect(player.x, player.y, player.width, player.height);
+
+        context.fillStyle = "green";
+        openings.forEach((opening, index) => {
+          opening.x -= 15;
+
+          if (
+            index === openings.length - 1 &&
+            opening.x + opening.width <= canvas.width
+          ) {
+            // Increase score when passing through an opening
+            openings.push({
+              x: opening.x + opening.width,
+              width: getRandomInt(400, canvas.width),
+              topHeight: opening.bottomHeight,
+              bottomHeight: getRandomInt(10, 100),
+            });
+          }
+
+          context.beginPath();
+          context.moveTo(opening.x, 0);
+          context.lineTo(opening.x, opening.topHeight);
+          context.lineTo(opening.x + opening.width, opening.bottomHeight);
+          context.lineTo(opening.x + opening.width, 0);
+          context.closePath();
+          context.fill();
+
+          context.beginPath();
+          context.moveTo(opening.x, canvas.height);
+          context.lineTo(opening.x, opening.topHeight + 450);
+          context.lineTo(opening.x + opening.width, opening.bottomHeight + 450);
+          context.lineTo(opening.x + opening.width, canvas.height);
+          context.closePath();
+          context.fill();
+        });
+
+        obstacles.forEach((obstacle, index) => {
+          obstacle.x -= 15;
+          context.fillRect(obstacle.x, obstacle.y, 65, 135);
+
+          if (
+            index === obstacles.length - 1 &&
+            obstacle.x + 65 <= canvas.width
+          ) {
+            obstacles.push({
+              x: canvas.width * 2,
+              y: getRandomInt(100, canvas.height - 135 - 100),
+            });
+          }
+        });
+
+        openings = openings.filter((opening) => opening.x + opening.width > 0);
+        obstacles = obstacles.filter((obstacle) => obstacle.x + 65 > 0);
+
+        const { data } = context.getImageData(
+          player.x,
+          player.y,
+          player.width,
+          player.height
+        );
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          if (r === wallRed && g === wallGreen && b === wallBlue) {
+            context.strokeStyle = "red";
+            context.setLineDash([5, 15]);
+            context.lineWidth = 4;
+
+            context.beginPath();
+            context.arc(
+              player.x + player.width / 2,
+              player.y + player.height / 2,
+              player.width,
+              0,
+              2 * Math.PI
+            );
+            context.stroke();
+
+            gameIsOver = true;
+            playAgainButton.style.display = "block";
+            return;
+          }
+        }
+
+        // Update the score display
+        scoreDisplay.textContent = `Score: ${score}`;
+
+        requestAnimationFrame(gameLoop);
       }
 
-      // Update the score display
-      scoreDisplay.textContent = `Score: ${score}`;
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.code === 'Space') {
-        isSpacePressed = true;
-      }
-    });
-
-    document.addEventListener('keyup', function(e) {
-      if (e.code === 'Space') {
-        isSpacePressed = false;
-      }
-    });
-
-    playAgainButton.addEventListener('click', function() {
-      player.y = 100;
-      player.velocityY = 0;
-      gameIsOver = false;
-      score = 0; // Reset score
-      playAgainButton.style.display = 'none';
-      obstacles.forEach((obstacle, index) => {
-        obstacle.x -= 100005;
-        context.fillRect(obstacle.x, obstacle.y, 65, 135);
+      document.addEventListener("keydown", function (e) {
+        if (e.code === "Space") {
+          isSpacePressed = true;
+        }
       });
+
+      document.addEventListener("keyup", function (e) {
+        if (e.code === "Space") {
+          isSpacePressed = false;
+        }
+      });
+
+      playAgainButton.addEventListener("click", function () {
+        player.y = 100;
+        player.velocityY = 0;
+        gameIsOver = false;
+        score = 0; // Reset score
+        playAgainButton.style.display = "none";
+        obstacles.forEach((obstacle, index) => {
+          obstacle.x -= 100005;
+          context.fillRect(obstacle.x, obstacle.y, 65, 135);
+        });
+        gameLoop();
+      });
+
       gameLoop();
-    });
-
-    gameLoop();
-  </script>
-</body>
+    </script>
+  </body>
 </html>
-

@@ -1,120 +1,369 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<link rel="icon" href="./favicon.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-    <meta name="description" content="👀">
-    <meta name="author" content="Aditya's Games">
-    <meta property="og:title" name="Title" content="Aditya's Games"/>
-	<title>Aditya's Games</title>
+  <head>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <meta name="description" content="👀" />
+    <meta name="author" content="Aditya's Games" />
+    <meta property="og:title" name="Title" content="Aditya's Games" />
+    <title>Aditya's Games</title>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="style.css" rel="stylesheet" type="text/css">
-<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script>
+      if (typeof module === "object") {
+        window.module = module;
+        module = undefined;
+      }
+    </script>
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery.horizonScroll.js"></script>
-<script>if (window.module) module = window.module;</script>
-	
-<script>
-function startTime() {
-var today = new Date();
-  var hours = today.getHours();
-  var minutes = today.getMinutes();
-  var ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
-  var strTime = hours + ':' + minutes + ' ' + ampm;
-  document.getElementById('time').innerHTML = strTime;
-    var t = setTimeout(startTime, 500);
-}
+    <script>
+      if (window.module) module = window.module;
+    </script>
 
-function polyAudio(path, copies) {
-  var elems = [], index = 0
-  for (var i = 0; i < 16; i++) elems.push(new Audio(path))
-  return {
-    play: function() {
-      if (window.chrome) elems[index].load()
-      elems[index].play()
-      index = (index + 1) % copies
-    }
-  }
-}
+    <script>
+      function startTime() {
+        var today = new Date();
+        var hours = today.getHours();
+        var minutes = today.getMinutes();
+        var ampm = hours >= 12 ? "pm" : "am";
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        var strTime = hours + ":" + minutes + " " + ampm;
+        document.getElementById("time").innerHTML = strTime;
+        var t = setTimeout(startTime, 500);
+      }
 
-var hover = polyAudio('snd/hover.mp3', 10);
-</script>
-	
-</head>
-<body onLoad="startTime();">
+      function polyAudio(path, copies) {
+        var elems = [],
+          index = 0;
+        for (var i = 0; i < 16; i++) elems.push(new Audio(path));
+        return {
+          play: function () {
+            if (window.chrome) elems[index].load();
+            elems[index].play();
+            index = (index + 1) % copies;
+          },
+        };
+      }
 
-<div class="horizon-prev"><img src="img/l-arrow.png"></div>
-<div class="horizon-next"><img src="img/r-arrow.png"></div>
+      var hover = polyAudio("snd/hover.mp3", 10);
+    </script>
+  </head>
+  <body onLoad="startTime();">
+    <div class="horizon-prev"><img src="img/l-arrow.png" /></div>
+    <div class="horizon-next"><img src="img/r-arrow.png" /></div>
 
-<section data-role="section" id="section-section1" class="section">
-<a onmouseover="hover.play();" href="#" style="background-image: url(img/test.webp);"> </a>
-<a onmouseover="hover.play();" href="games/Color Sleuth FP/colourlsleuth.html" style="background-image:    url(img/coloursleuth.webp);"> </a>
-<a onmouseover="hover.play();" href="games/CandyFind/Findthe.html" style="background-image:    url(img/findthe.webp);"> </a>
-<a onmouseover="hover.play();" href="games/gokulovesphysics.html" style="background-image:    url(img/gokuphys.webp );"> </a>
-<a onmouseover="hover.play();" href="games/fidgetspinnerspinner.html" style="background-image:    url(img/Fidgetspinner.webp);"> </a>
-<a onmouseover="hover.play();" href="games/colourcombat.html" style="background-image:    url(img/Colourcombat.webp);"> </a>
-<a onmouseover="hover.play();" href="games/helicopter.html" style="background-image:   url(img/Helicopter.webp);"> </a>
-<a onmouseover="hover.play();" href="games/penfootball.html" style="background-image:    url(img/Penfootball.webp);"> </a>
-<a onmouseover="hover.play();" href="games/paratroopershooter.html" style="background-image:    url(img/parashooter.webp);"> </a>
-<a onmouseover="hover.play();" href="games/spidermanengine.html" style="background-image:    url(img/spidermanengine.webp);"> </a>
-<a onmouseover="hover.play();" href="games/zombieshooter.html" style="background-image:    url(img/Zombieshooter.webp);"> </a>
-<a onmouseover="hover.play();" href="games/geometrydash.html" style="background-image:    url(img/geometrydash.webp);"> </a>
-</section>
-<section data-role="section" id="section-section2" class="section">
-<a onmouseover="hover.play();" href="games/cubemine.html" style="background-image:    url(img/cubemine.webp);"> </a>
-<a onmouseover="hover.play();" href="" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-</section>
-<section data-role="section" id="section-section3" class="section">
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-</section>
-<section data-role="section" id="section-section4" class="section">
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="#" style="background-image:    url(img/default.webp);"> </a>
-<a onmouseover="hover.play();" href="https://wii.teamtedps.tk/apps/secretforum" style="background-image:    url(img/default.webp);"> </a>
-</section>
+    <section data-role="section" id="section-section1" class="section">
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/test.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/Color Sleuth FP/colourlsleuth.html"
+        style="background-image: url(img/coloursleuth.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/CandyFind/Findthe.html"
+        style="background-image: url(img/findthe.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/gokulovesphysics.html"
+        style="background-image: url(img/gokuphys.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/fidgetspinnerspinner.html"
+        style="background-image: url(img/Fidgetspinner.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/colourcombat.html"
+        style="background-image: url(img/Colourcombat.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/helicopter.html"
+        style="background-image: url(img/Helicopter.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/penfootball.html"
+        style="background-image: url(img/Penfootball.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/paratroopershooter.html"
+        style="background-image: url(img/parashooter.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/spidermanengine.html"
+        style="background-image: url(img/spidermanengine.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/zombieshooter.html"
+        style="background-image: url(img/Zombieshooter.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="games/geometrydash.html"
+        style="background-image: url(img/geometrydash.webp)"
+      >
+      </a>
+    </section>
+    <section data-role="section" id="section-section2" class="section">
+      <a
+        onmouseover="hover.play();"
+        href="games/cubemine.html"
+        style="background-image: url(img/cubemine.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href=""
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href=""
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href=""
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href=""
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+    </section>
+    <section data-role="section" id="section-section3" class="section">
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+    </section>
+    <section data-role="section" id="section-section4" class="section">
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="#"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+      <a
+        onmouseover="hover.play();"
+        href="https://wii.teamtedps.tk/apps/secretforum"
+        style="background-image: url(img/default.webp)"
+      >
+      </a>
+    </section>
 
-<footer data-role="footer" id="footer">
-<p id="time"></p></footer>
+    <footer data-role="footer" id="footer">
+      <p id="time"></p>
+    </footer>
 
-<script type="text/javascript">
-    $('section').horizon();
-</script>
-
-</body>
-<audio src="snd/menu.mp3" loop=1 id="menu" auto autoplay></audio>
+    <script type="text/javascript">
+      $("section").horizon();
+    </script>
+  </body>
+  <audio src="snd/menu.mp3" loop="1" id="menu" auto autoplay></audio>
 </html>
