@@ -123,6 +123,13 @@
       context.fillRect(0, 0, 1, 1);
       const wallData = context.getImageData(0, 0, 1, 1);
       const [wallRed, wallGreen, wallBlue] = wallData.data;
+      function isTouchDevice(){
+        return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+      }
+
+      if(isTouchDevice()===true) {
+        alert('Touch Device');
+      }
 
       function gameLoop() {
         score++;
@@ -133,6 +140,12 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         if (isSpacePressed) {
+          player.accelerationY = -3;
+        } else {
+          player.accelerationY = 3;
+        }
+
+        if(isTouchDevice()===true) {
           player.accelerationY = -3;
         } else {
           player.accelerationY = 3;
