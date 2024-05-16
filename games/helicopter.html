@@ -127,9 +127,9 @@
         return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
       }
 
-      if(isTouchDevice()===true) {
-        alert('Touch Device');
-      }
+      // if(isTouchDevice()===true) {
+      //   alert('Touch Device');
+      // }
 
       function gameLoop() {
         score++;
@@ -145,11 +145,11 @@
           player.accelerationY = 3;
         }
 
-        if(isTouchDevice()===true) {
-          player.accelerationY = -3;
-        } else {
-          player.accelerationY = 3;
-        }
+        // if(isTouchDevice()===true) {
+        //   player.accelerationY = -3;
+        // } else {
+        //   player.accelerationY = 3;
+        // }
 
         player.velocityY += player.accelerationY + 0.35;
         player.velocityY = clamp(player.velocityY, -10, 10);
