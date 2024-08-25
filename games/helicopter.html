@@ -72,6 +72,7 @@
       document.body.appendChild(scoreDisplay);
 
       let isSpacePressed = false;
+      let isScreenTouched = false;
       let gameIsOver = false;
       let score = 0;
 
@@ -123,13 +124,6 @@
       context.fillRect(0, 0, 1, 1);
       const wallData = context.getImageData(0, 0, 1, 1);
       const [wallRed, wallGreen, wallBlue] = wallData.data;
-      function isTouchDevice(){
-        return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
-      }
-
-      // if(isTouchDevice()===true) {
-      //   alert('Touch Device');
-      // }
 
       function gameLoop() {
         score++;
@@ -139,17 +133,11 @@
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (isSpacePressed) {
+        if (isSpacePressed === true || isScreenTouched === true) {
           player.accelerationY = -3;
         } else {
           player.accelerationY = 3;
         }
-
-        // if(isTouchDevice()===true) {
-        //   player.accelerationY = -3;
-        // } else {
-        //   player.accelerationY = 3;
-        // }
 
         player.velocityY += player.accelerationY + 0.35;
         player.velocityY = clamp(player.velocityY, -10, 10);
@@ -259,6 +247,15 @@
         if (e.code === "Space") {
           isSpacePressed = false;
         }
+      });
+
+      // Touch events for mobile devices
+      document.addEventListener("touchstart", function () {
+        isScreenTouched = true;
+      });
+
+      document.addEventListener("touchend", function () {
+        isScreenTouched = false;
       });
 
       playAgainButton.addEventListener("click", function () {

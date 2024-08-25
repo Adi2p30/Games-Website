@@ -23,6 +23,41 @@ function initGame() {
 
 document.addEventListener('keydown', changeDirection);
 
+// Handle touch start
+let touchStartX = null;
+let touchStartY = null;
+
+document.addEventListener("touchstart", function(event) {
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+});
+
+// Handle touch move to detect direction
+document.addEventListener("touchmove", function(event) {
+    if (!touchStartX || !touchStartY) return;
+
+    const touchEndX = event.touches[0].clientX;
+    const touchEndY = event.touches[0].clientY;
+
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 0 && direction !== 'LEFT') direction = 'RIGHT';
+        else if (diffX < 0 && direction !== 'RIGHT') direction = 'LEFT';
+    } else {
+        // Vertical swipe
+        if (diffY > 0 && direction !== 'UP') direction = 'DOWN';
+        else if (diffY < 0 && direction !== 'DOWN') direction = 'UP';
+    }
+
+    // Reset touch start positions
+    touchStartX = null;
+    touchStartY = null;
+});
+
 function changeDirection(event) {
     const keyPressed = event.keyCode;
     if (keyPressed === 37 && direction !== 'RIGHT') direction = 'LEFT';

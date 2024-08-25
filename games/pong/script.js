@@ -77,21 +77,21 @@ function moveBall() {
 
     // Ball collision with top and bottom walls
     if (ball.y < 0 || ball.y + ballSize > canvas.height) {
-        ball.dy *= -1.01;
+        ball.dy *= -1.02;
     }
 
     // Ball collision with player paddle
     if (ball.x < playerPaddle.x + paddleWidth &&
         ball.y > playerPaddle.y &&
         ball.y < playerPaddle.y + paddleHeight) {
-        ball.dx *= -1.01;
+        ball.dx *= -1.02;
     }
 
     // Ball collision with AI paddle
     if (ball.x + ballSize > aiPaddle.x &&
         ball.y > aiPaddle.y &&
         ball.y < aiPaddle.y + paddleHeight) {
-        ball.dx *= -1;
+        ball.dx *= -1.02;
     }
 
     // Ball goes out of bounds (player scores)
@@ -110,7 +110,7 @@ function moveBall() {
 function resetBall() {
     ball.x = canvas.width / 2;
     ball.y = canvas.height / 2;
-    ball.dx *= -1; // Change ball direction
+    ball.dx *= -1.02; // Change ball direction
 }
 
 function drawPaddle(x, y, width, height) {
