@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <link rel="stylesheet" href="sudoku/styles.css">
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <a href="#" onclick="history.back()" class="back-button">Back</a>
+    <div class="sudoku-board" id="sudoku-board"></div>
+    <div class="button-row">
+        <button onclick="generatePuzzle()">Generate New Puzzle</button>
+        <button onclick="solveSudokuPuzzle()">Solve Puzzle</button>
+        <button onclick="checkSolution()">Check Solution</button>
+        <button onclick="resetBoard()">Reset</button>
+    </div>
+    <script src="sudoku/script.js"></script>
+</body>
+</html>

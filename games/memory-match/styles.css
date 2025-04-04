@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    margin-top: 20px;
+    color: white;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 2px;
+    margin: 20px;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: grey;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: transparent;
+    cursor: pointer;
+}
+
+.card.flipped {
+    background-color: white;
+    color: black;
+}
+
+.stats {
+    margin: 20px;
+    color: white;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: grey;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d3d3d3;
+    color: black;
+}
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #fdf6bc;
+    color: #000;
+    border: 1px solid #000;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: "Courier New", Courier, monospace;
+    border-color: #000;
+    border-radius: 4px;
+  }
